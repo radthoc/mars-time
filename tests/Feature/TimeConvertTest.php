@@ -3,13 +3,12 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class TimeConvertTest extends TestCase
 {
     public function testConvertTime()
     {
-        $time = strtotime(gmdate("M d Y H:i:s"));
+        $time = gmdate("M d Y H:i:s");
 
         $response = $this->json('GET', 'time/convert/' . $time)
             ->assertJson([
