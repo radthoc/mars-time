@@ -22,3 +22,9 @@ So what are the risks and challenges?
 Well, anyway, this API allows to get the Mars Sol Date (MSD) and the Martian Coordinated Time (MTC) based on the time on Earth in UTC.
 The **endpoint** is *time/convert/{UTC_time}*.
 
+###### TODOs
+- Extract the date handling functions to a helper
+- Validate errors and send corresponding responses 
+- Clean everything that is not needed from the framework 
+
+
