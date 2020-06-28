@@ -15,6 +15,8 @@ class MartianTime implements MartianTimeInterface
      */
     public function getMartianTime(string $time): array
     {
+        //TODO: Validate input
+        //TODO: Extract date handling functions to a date helper
         $dateTime = new DateTime($time, new DateTimeZone('UTC'));
         $milliseconds = $dateTime->format('U');
 
@@ -34,16 +36,7 @@ class MartianTime implements MartianTimeInterface
     public function getMarsSolDate(int $millis): float
     {
         $julianDateUT = $this->calculateJulianDateUT($millis);
-        $timeOffset = $this->calculateTimeOffset($julianDateUT);
-
-        $differenceTerrestrialTimeUTC = 64.184 + 59 * $timeOffset -
-            51.2 * pow($timeOffset, 2) -
-            67.1 * pow($timeOffset, 3) -
-            16.4 * pow($timeOffset, 4);
-
-
-        $julianDateTT = $this->calculateJulianDateTT($julianDateUT, $differenceTerrestrialTimeUTC);
-
+        $julianDateTT = $this->calculateJulianDateTT($julianDateUT);
         $terrestrialTimeOffset = $this->calculateTerrestrialTimeOffset($julianDateTT);
 
         return $this->calculateMarsSolDate($terrestrialTimeOffset);
@@ -56,6 +49,7 @@ class MartianTime implements MartianTimeInterface
     public function getMartianCoordinatedTime(float $marsSolDate): string
     {
         $seconds = (86400 * $marsSolDate) % 86400;
+        //TODO: Extract date handling functions to a date helper
         return gmdate("H:i:s", $seconds);
     }
 
@@ -72,19 +66,8 @@ class MartianTime implements MartianTimeInterface
      * @param float $julianDateUT
      * @return float
      */
-    private function calculateTimeOffset(float $julianDateUT): float
+    private function calculateJulianDateTT(float $julianDateUT): float
     {
-        return ($julianDateUT - 2451545.0) / 36525;
-    }
-
-    /**
-     * @param float $julianDateUT
-     * @param float $differenceTerrestrialTimeUTC
-     * @return float
-     */
-    private function calculateJulianDateTT(float $julianDateUT, float $differenceTerrestrialTimeUTC): float
-    {
-//        return $julianDateUT + ($differenceTerrestrialTimeUTC / 86400);
         return $julianDateUT + (37 + 32.184) / 86400;
     }
 

@@ -23,6 +23,7 @@ class TimeController extends Controller
      */
     public function __invoke(string $time)
     {
+        //TODO: Add other posible responses depending on the input validation
         return response()->json($this->martianTimeService->getMartianTime($time));
     }
 }
