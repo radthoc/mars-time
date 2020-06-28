@@ -16,7 +16,7 @@ So what are the risks and challenges?
 - Home sickness
 - No social media
 - No cable TV
-- A contemplative life and the confinement of a monastic closure, which leaves the lockdown as living la vida loca 
+- A contemplative life and the confinement of a monastic closure, which leaves the caruna lockdown as if it was living la vida loca 
 
 Well, anyway, this API allows to get the Mars Sol Date (MSD) and the Martian Coordinated Time (MTC) based on the time on Earth in UTC.
 The **endpoint** is *time/convert/{UTC_time}*.
